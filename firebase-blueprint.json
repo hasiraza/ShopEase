@@ -1,0 +1,110 @@
+{
+  "entities": {
+    "Category": {
+      "title": "Category",
+      "description": "Product category definition",
+      "type": "object",
+      "properties": {
+        "category_id": { "type": "number" },
+        "category_name": { "type": "string" },
+        "description": { "type": "string" }
+      },
+      "required": ["category_id", "category_name", "description"]
+    },
+    "Customer": {
+      "title": "Customer",
+      "description": "Store customer profile data",
+      "type": "object",
+      "properties": {
+        "customer_id": { "type": "number" },
+        "first_name": { "type": "string" },
+        "last_name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "city": { "type": "string" },
+        "registration_date": { "type": "string" }
+      },
+      "required": ["customer_id", "first_name", "last_name", "email", "phone", "city", "registration_date"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Inventory product item",
+      "type": "object",
+      "properties": {
+        "product_id": { "type": "number" },
+        "category_id": { "type": "number" },
+        "product_name": { "type": "string" },
+        "price": { "type": "number" },
+        "stock_qty": { "type": "number" },
+        "description": { "type": "string" }
+      },
+      "required": ["product_id", "category_id", "product_name", "price", "stock_qty", "description"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Purchase order information",
+      "type": "object",
+      "properties": {
+        "order_id": { "type": "number" },
+        "customer_id": { "type": "number" },
+        "order_date": { "type": "string" },
+        "status": { "type": "string" },
+        "total_amount": { "type": "number" }
+      },
+      "required": ["order_id", "customer_id", "order_date", "status", "total_amount"]
+    },
+    "OrderItem": {
+      "title": "OrderItem",
+      "description": "Individual items contained within an order",
+      "type": "object",
+      "properties": {
+        "item_id": { "type": "number" },
+        "order_id": { "type": "number" },
+        "product_id": { "type": "number" },
+        "quantity": { "type": "number" },
+        "unit_price": { "type": "number" }
+      },
+      "required": ["item_id", "order_id", "product_id", "quantity", "unit_price"]
+    },
+    "Payment": {
+      "title": "Payment",
+      "description": "Payment records associated with orders",
+      "type": "object",
+      "properties": {
+        "payment_id": { "type": "number" },
+        "order_id": { "type": "number" },
+        "payment_date": { "type": "string" },
+        "amount": { "type": "number" },
+        "payment_method": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "required": ["payment_id", "order_id", "payment_date", "amount", "payment_method", "status"]
+    }
+  },
+  "firestore": {
+    "/categories/{categoryId}": {
+      "schema": "Category",
+      "description": "Product categories in the database"
+    },
+    "/customers/{customerId}": {
+      "schema": "Customer",
+      "description": "Customer list"
+    },
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Products list"
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Orders list"
+    },
+    "/order_items/{orderItemId}": {
+      "schema": "OrderItem",
+      "description": "Individual items list for order"
+    },
+    "/payments/{paymentId}": {
+      "schema": "Payment",
+      "description": "Payments list"
+    }
+  }
+}

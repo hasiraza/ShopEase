@@ -1,0 +1,50 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default-deny safety net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Database Tables - restricted to signed in admin users
+    match /categories/{categoryId} {
+      allow get: if isSignedIn() && isValidId(categoryId);
+      allow list: if isSignedIn();
+      allow write: if isSignedIn() && isValidId(categoryId);
+    }
+    match /customers/{customerId} {
+      allow get: if isSignedIn() && isValidId(customerId);
+      allow list: if isSignedIn();
+      allow write: if isSignedIn() && isValidId(customerId);
+    }
+    match /products/{productId} {
+      allow get: if isSignedIn() && isValidId(productId);
+      allow list: if isSignedIn();
+      allow write: if isSignedIn() && isValidId(productId);
+    }
+    match /orders/{orderId} {
+      allow get: if isSignedIn() && isValidId(orderId);
+      allow list: if isSignedIn();
+      allow write: if isSignedIn() && isValidId(orderId);
+    }
+    match /order_items/{orderItemId} {
+      allow get: if isSignedIn() && isValidId(orderItemId);
+      allow list: if isSignedIn();
+      allow write: if isSignedIn() && isValidId(orderItemId);
+    }
+    match /payments/{paymentId} {
+      allow get: if isSignedIn() && isValidId(paymentId);
+      allow list: if isSignedIn();
+      allow write: if isSignedIn() && isValidId(paymentId);
+    }
+  }
+}

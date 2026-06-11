@@ -1,0 +1,6 @@
+{
+  "name": "ShopEase",
+  "description": "An Online Store Admin Dashboard containing KPI metrics, Canvas analytics charts, and management tools for products, orders, customers, and payments.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
